@@ -62,6 +62,7 @@ android {
       isShrinkResources = false
       ext["enableCrashlytics"] = false
       multiDexEnabled = true
+      applicationIdSuffix = ".debug"
     }
     all {
       signingConfig = signingConfigs.getByName("release")
