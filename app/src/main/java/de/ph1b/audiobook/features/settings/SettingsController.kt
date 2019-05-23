@@ -1,6 +1,8 @@
 package de.ph1b.audiobook.features.settings
 
+import android.content.Intent
 import androidx.annotation.StringRes
+import com.anod.appwatcher.userLog.UserLogActivity
 import de.ph1b.audiobook.R
 import de.ph1b.audiobook.features.BaseController
 import de.ph1b.audiobook.features.bookPlaying.SeekDialogController
@@ -81,6 +83,13 @@ class SettingsController : BaseController() {
       .map { resources!!.getQuantityString(R.plurals.seconds, it, it) }
       .subscribe { autoRewind.setDescription(it) }
       .disposeOnDestroyView()
+
+    setupTextSetting(
+        doubleSettingView = userLog,
+        titleRes = R.string.user_log
+    ) {
+      startActivity(Intent(activity, UserLogActivity::class.java))
+    }
   }
 
   private fun setupToolbar() {

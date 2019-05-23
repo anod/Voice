@@ -67,6 +67,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".features.MainActivity" />
         </activity>
+        <activity android:name="com.anod.appwatcher.userLog.UserLogActivity"
+
+            />
 
         <service
             android:name=".playback.PlaybackService"

@@ -3,6 +3,7 @@ package de.ph1b.audiobook.injection
 import android.app.Application
 import android.os.Build
 import android.os.Looper
+import android.util.Log
 import android.webkit.WebView
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatDelegate
@@ -22,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.logging.Logger
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -55,7 +57,12 @@ class App : Application() {
     CrashReporter.init(this)
     GlobalScope.launch {
       if (BuildConfig.DEBUG) {
-        Timber.plant(Timber.DebugTree())
+        Timber.plant(object : Timber.Tree() {
+          override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+            Log.println(priority, "VoiceApp", message)
+          }
+
+        })//Timber.DebugTree())
       } else {
         Timber.plant(CrashLoggingTree())
       }
